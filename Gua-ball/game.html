@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <meta charest="utf-8" />
+    <title>Gua</title>
+    <style>
+        canvas{
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+     <canvas id="id-canvas" width="400" height="300"></canvas>
+
+
+<script>
+    var log = console.log.bind(console);
+
+    var Paddle = function () {
+        var image =
+        var o = {
+            image:
+        }
+    }
+    var _main = function () {
+        var canvas = document.querySelector("#id-canvas");
+        var context = canvas.getContext('2d');
+        var img = new Image();
+
+        var x = 100;
+        var y = 200;
+        var speed = 5;
+
+        log(img)
+        img.src = "paddle.png";
+
+        img.onload = function () {
+            context.drawImage(img,x,y);
+        };
+
+
+        var leftDown = false;
+        var rightDown = false;
+
+        // events
+        window.addEventListener("keydown", function(event){
+            var k = event.key;
+
+            if(k == "a"){
+                // 向左
+                leftDown = true;
+            }else if(k == "d") {
+                // 向右
+                rightDown = true;
+            }
+
+        });
+
+        window.addEventListener("keyup", function(event){
+            var k = event.key;
+
+            if(k == "a"){
+                leftDown = false;
+            }else if(k == "d") {
+                rightDown = false;
+            }
+
+        });
+
+        setInterval(function(){
+            // update x and y
+            if(leftDown){
+                x -= speed;
+            }else if(rightDown){
+                x += speed;
+            }
+            // draw
+            context.clearRect(0,0,canvas.width,canvas.height);
+            context.drawImage(img,x,y);
+        },1000/60);
+    };
+
+    _main();
+</script>
+</body>
+</html>
